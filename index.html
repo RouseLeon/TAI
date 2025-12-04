@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Aktywna Nawigacja Mobilna</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+    <style></style>
+</head>
+<body>
+    <button id="mobile-menu" style="display: none;">☰ Menu Mobilne</button>
+<nav id="classic-menu">
+    <a href="#">Strona Główna</a> | <a href="#">Usługi</a> | <a href="#">Kontakt</a>
+</nav>
+<p>Zmień szerokość okna przeglądarki, aby przełączać menu.</p>
+<script>
+let mediaquery = window.matchMedia("(max-width: 767px)");
+let mobileMenu = document.getElementById("mobile-menu");
+let classicMenu = document.getElementById("classic-menu");
+function handleMenuSwitch(e) {
+    if (e.matches) {
+        mobileMenu.style.display = "block";
+        classicMenu.style.display = "none";
+    } else{
+        mobileMenu.style.display = "none";
+        classicMenu.style.display = "block";
+    }
+}
+mediaquery.addEventListener("change", handleMenuSwitch);
+handleMenuSwitch(mediaquery);
+    </script>
+</body>
+</html>
