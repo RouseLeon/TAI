@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Okna Dialogowe</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <script>
+
+let product = prompt(
+    "Jaki produkt chcesz zamówić? (Wprowadź: Laptop lub Mysz)",
+    "Laptop"
+);
+
+if (product === null) {
+    alert("Produkt nieznany lub anulowano. Proces zamawiania przerwany.");
+} else {
+    product = product.trim().toLowerCase();
+
+    let confirmMessage = "";
+
+    if (product === "laptop") {
+        confirmMessage = "Czy na pewno chcesz zamówić Laptopa za 4500 PLN?";
+    } else if (product === "mysz") {
+        confirmMessage = "Czy na pewno chcesz zamówić Mysz za 150 PLN?";
+    } else {
+        alert("Produkt nieznany lub anulowano. Proces zamawiania przerwany.");
+    }
+
+    const decision = confirm(confirmMessage);
+
+    if (decision) {
+        const productName = product === "laptop" ? "Laptop" : "Mysz";
+        alert("Zamówienie produktu " + productName + " zostało złożone. Dziękujemy!");
+    } else {
+        alert("Zamówienie anulowane przez użytkownika.");
+    }
+}
+
+
+
+        </script> 
+</body>
+</html>
