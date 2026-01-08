@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Windows JavaScript</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <button id="sprawdzanie" onclick="sprawdz()">Przycisk</button>
+    <button onclick="okno_pomocy()">Otworz okno pomocy</button>
+   <script>
+        function sprawdz(){
+            if(window.innerWidth < 800){
+                alert("Uzywasz wersji mobilnej lub okna malego")
+            }else{ 
+                alert("Wszystko jest git")
+            }
+        }
+
+        let wiek = prompt("Podaj wiek:")
+        if(wiek < 18){
+            window.location.href = "http://google.pl"
+        }else if(wiek >= 18){
+            alert("Masz co najmniej 18 lat!")
+        }
+
+        function okno_pomocy(){
+
+            window.open(
+            "about:blank",
+            "OknoPomocy",    
+            "width=400, height=400")
+        }
+        
+        window.setInterval(function(){
+         console.log(window.innerHeight)
+        },10000)
+    </script>
+</body>
+</html>
