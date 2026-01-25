@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Czas</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <script>
+    let actual = new Date();
+    let godzina = actual.getHours();
+
+    if (godzina >= 6 && godzina < 18) {
+        console.log("Dzień dobry!");
+    } else {
+        console.log("Dobry wieczór!");
+    }
+
+    const miesiace = [
+        "stycznia"
+    ];
+
+    let dzien = actual.getDate();
+    let miesiac = miesiace[actual.getMonth()];
+    let rok = actual.getFullYear();
+
+    console.log(dzien + " " + miesiac + " " + rok);
+    console.log("Godzina jest: " + godzina);
+    </script>    
+</body>
+</html>
