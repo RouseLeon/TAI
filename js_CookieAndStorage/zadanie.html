@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Personalizator Wyglądu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            transition:  0.3s ;
+            padding: 20px;
+        }
+
+        .panel {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 300px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Personalizator Wyglądu Strony</h1>
+
+    <div class="panel">
+        <label>Wybierz kolor tła:</label><br>
+        <input type="color" id="bgColorPicker"><br><br>
+
+        <label>Rozmiar czcionki:</label><br>
+        <input type="range" id="fontSizeRange" min="12" max="40">
+        <span id="fontSizeValue"></span> px<br>
+
+        <button id="resetBtn">Przywróć domyślne</button>
+    </div>
+
+    <p>
+        To jest przykładowy tekst do testowania zmian wyglądu strony.
+    </p>
+
+    <script>
+        const bgColorPicker = document.getElementById("bgColorPicker");
+        const fontSizeRange = document.getElementById("fontSizeRange");
+        const fontSizeValue = document.getElementById("fontSizeValue");
+        const resetBtn = document.getElementById("resetBtn");
+
+        const defaultSettings = {
+            bgColor: "#ffffff",
+            fontSize: "16"
+        };
+
+        // Wczytaj zapisane ustawienia
+        window.addEventListener("DOMContentLoaded", () => {
+            const bgColor = localStorage.getItem("bgColor") || defaultSettings.bgColor;
+            const fontSize = localStorage.getItem("fontSize") || defaultSettings.fontSize;
+
+            document.body.style.backgroundColor = bgColor;
+            document.body.style.fontSize = fontSize + "px";
+
+            bgColorPicker.value = bgColor;
+            fontSizeRange.value = fontSize;
+            fontSizeValue.textContent = fontSize;
+        });
+
+        // Zmiana koloru tła
+        bgColorPicker.addEventListener("input", () => {
+            document.body.style.backgroundColor = bgColorPicker.value;
+            localStorage.setItem("bgColor", bgColorPicker.value);
+        });
+
+        // Zmiana rozmiaru czcionki
+        fontSizeRange.addEventListener("input", () => {
+            document.body.style.fontSize = fontSizeRange.value + "px";
+            fontSizeValue.textContent = fontSizeRange.value;
+            localStorage.setItem("fontSize", fontSizeRange.value);
+        });
+
+        // Reset ustawień
+        resetBtn.addEventListener("click", () => {
+            localStorage.removeItem("bgColor");
+            localStorage.removeItem("fontSize");
+
+            document.body.style.backgroundColor = defaultSettings.bgColor;
+            document.body.style.fontSize = defaultSettings.fontSize + "px";
+
+            bgColorPicker.value = defaultSettings.bgColor;
+            fontSizeRange.value = defaultSettings.fontSize;
+            fontSizeValue.textContent = defaultSettings.fontSize;
+        });
+    </script>
+
+</body>
+</html>
