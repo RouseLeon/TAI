@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Zadanie</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body>
+    <input type="text" id="userName" placeholder="Wpisz imię">
+<button onclick="saveAndGo()">Zapisz i Dalej</button>
+<a href="podstrona.html">Przejdz do podstrony</a>
+<script>
+function saveAndGo() {
+    const name = document.getElementById('userName').value;
+    if(name) {
+        localStorage.setItem('user_name', name);
+        sessionStorage.setItem('user_name',name);
+        alert('Imię zapisane w LocalStorage! Możesz przejść do podstrony.');
+    }
+}
+sessionStorage.setItem("temp_code", "12345");
+localStorage.setItem("isLoggedIn", "true");
+alert(sessionStorage.getItem("temp_code"));
+</script>
+</body>
+</html>
+
+
