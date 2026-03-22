@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Wyrazenia_regularne</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body>
+        <input type="text"  id="kod" placeholder="np. 00-950"><br><br>
+        <button onclick="validate()">Sprawdz</button>
+        <div id="info"></div><br><br>
+
+        <input type="text"  id="code" placeholder="np. Mój numer to 500-600-700, a szefa 888-999-000"><br><br>
+        <button onclick="swap()">Sprawdz</button>
+        <div id="pole"></div>
+
+    <script>
+        function validate(){
+        let kod = document.getElementById('kod').value
+            const regex = /^\d{2}-\d{3}$/
+            if(regex.test(kod)){
+                document.getElementById('info').innerHTML = `<h1>Poprawny kod!</h1>`
+            }else{
+                document.getElementById('info').innerHTML = `<h1>Wprowadzony kod zostal wpisany zle!</h1>`
+            }
+        }
+
+
+      function swap() {
+    let code = document.getElementById('code').value;   
+    const ukryty = code.replace(/\d/g, "X");       
+    
+    document.getElementById('pole').innerHTML = ukryty + "<br>Essa!";
+      }
+
+
+
+      const logs = "ERROR [2026-03-18] User: admin - Connection failed; INFO [2026-03-18] User: guest - Login success; ERROR [2026-03-19] User: root - Disk full;";
+
+const dates = logs.match(/\d{4}-\d{2}-\d{2}/g);
+console.log("Daty:", dates);
+
+const userMatches = [...logs.matchAll(/User:\s(\w+)\s-/g)];
+const users = userMatches.map(match => match[1]);
+console.log("Użytkownicy:", users);
+
+const errorCount = (logs.match(/ERROR/g) || []).length;
+console.log("Liczba błędów:", errorCount);
+
+const entries = logs.split(';').filter(entry => entry.trim() !== "");
+
+const logObjects = entries.map(entry => {
+    const typeMatch = entry.match(/(ERROR|INFO)/);
+    const userMatch = entry.match(/User:\s(\w+)/);
+    
+    return {
+        type: typeMatch ? typeMatch[0] : null,
+        user: userMatch ? userMatch[1] : null
+    };
+});
+
+console.log("Obiekty logów:", logObjects);
+    </script>
+</body>
+</html>
