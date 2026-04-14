@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>RegEx Master</title>
+</head>
+<body>
+
+
+<h2> Walidacja Hasła</h2>
+<input type="text" id="password" placeholder="Wpisz hasło">
+<button onclick="validatePassword()">Sprawdź</button>
+<p id="passwordResult"></p>
+
+
+<h2>Walidacja Numeru Telefonu</h2>
+<input type="text" id="phone" placeholder="Np. +48 123 456 789">
+<button onclick="validatePhone()">Sprawdź</button>
+<p id="phoneResult"></p>
+
+
+<h2> Cenzurowanie tekstu</h2>
+<textarea id="text" rows="4" cols="50" placeholder="Wpisz tekst z RegEx"></textarea><br>
+<button onclick="censor()">Cenzuruj</button>
+<p id="censorResult"></p>
+
+
+<h2> Parsowanie logów</h2>
+<input type="text" id="log" placeholder="ERROR [2023-10-12]: ...">
+<button onclick="parseLog()">Parsuj</button>
+<p id="logResult"></p>
+
+<script>
+
+
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+function validatePassword() {
+  const value = document.getElementById("password").value;
+  const result = document.getElementById("passwordResult");
+
+  if (passwordRegex.test(value)) {
+    result.textContent = " Silne hasło";
+  } else {
+    result.textContent = " Hasło za słabe";
+  }
+}
+
+
+const phoneRegex = /^(\d{9}|\d{3}-\d{3}-\d{3}|\+48 \d{3} \d{3} \d{3})$/;
+
+function validatePhone() {
+  const value = document.getElementById("phone").value;
+  const result = document.getElementById("phoneResult");
+
+  if (phoneRegex.test(value)) {
+    result.textContent = " Poprawny numer";
+  } else {
+    result.textContent = " Niepoprawny format";
+  }
+}
+
+
+
+const censorRegex = /regex/gi;
+
+function censor() {
+  const text = document.getElementById("text").value;
+  const result = document.getElementById("censorResult");
+
+  const censored = text.replace(censorRegex, "ZAKRYTO");
+  result.textContent = censored;
+}
+
+
+const logRegex = /^(ERROR|WARNING|INFO) \[(\d{4}-\d{2}-\d{2})\]/;
+
+function parseLog() {
+  const value = document.getElementById("log").value;
+  const result = document.getElementById("logResult");
+
+  const match = value.match(logRegex);
+
+  if (match) {
+    result.textContent = `Typ: ${match[1]}, Data: ${match[2]}`;
+  } else {
+    result.textContent = " Niepoprawny log";
+  }
+}
+</script>
+
+</body>
+</html>
+
