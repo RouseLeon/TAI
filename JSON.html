@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>JSON</title>
+</head>
+    <body>
+        Dodanie nowego komentarza pod postem -> POST <br><br>
+Wyświetlenie listy znajomych -> GET <br><br>
+Zmiana hasła użytkownika -> PUT/PATCH   <br><br>
+
+        <button id="pies">Pokaz Cerbera</button>
+        <br>
+        <img id="image" width="200"><br><br>
+
+        <button id="load">Pobierz uzytk</button>
+        <ul id="user-list"></ul>
+        <script>
+    const books = [
+    { title: "Pan Tadeusz", author: "Adam Mickiewicz" },
+    { title: "Lalka", author: "Bolesław Prus" },
+    { title: "Wiedźmin", author: "Andrzej Sapkowski" }
+    ];
+
+const jsonBooks = JSON.stringify(books);
+
+console.log(jsonBooks);
+
+document.getElementById("pies").addEventListener("click", () => {
+    fetch("https://dog.ceo/api/breeds/image/random")
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("image").src = data.message;
+        })
+        
+});
+
+        document.getElementById("load").addEventListener("click", () => {
+    const list = document.getElementById("user-list");
+    list.innerHTML = ""; 
+
+    fetch("https://jsonplaceholder.typicode.com/users")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Błąd sieci");
+            }
+            return response.json();
+        })
+        .then(users => {
+            users.forEach(user => {
+                const li = document.createElement("li");
+                li.textContent = `${user.name} (${user.email})`;
+                list.appendChild(li);
+            });
+        })
+        .catch(error => {
+            list.innerHTML = "<li>Błąd ładowania danych</li>";
+            console.error(error);
+        });
+    });
+        </script>
+    </body>
+</html> 
